@@ -10,6 +10,10 @@ public class RoverDto {
         this.isDeployed = false;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public boolean isDeployed() {
         return isDeployed;
     }

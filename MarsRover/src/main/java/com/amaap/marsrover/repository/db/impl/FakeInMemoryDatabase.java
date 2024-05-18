@@ -8,11 +8,16 @@ import java.util.List;
 
 public class FakeInMemoryDatabase implements InMemoryDatabase {
     private List<RoverDto> rovers = new ArrayList<>();
-    private int roverCounter = 0;
+    private int roverIdCounter = 0;
     @Override
     public RoverDto insertIntoRoverTable() {
-        RoverDto rover = new RoverDto(++roverCounter);
+        RoverDto rover = new RoverDto(++roverIdCounter);
         rovers.add(rover);
         return rover;
+    }
+
+    @Override
+    public RoverDto selectFromRoverTable(int id) {
+        return rovers.stream().filter(rover -> rover.getId() == id).findFirst().orElse(null);
     }
 }

@@ -22,4 +22,18 @@ class FakeInMemoryDatabaseTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    void shouldBeAbleToGetRoverByIdFromDatabase()
+    {
+        // arrange
+        RoverDto expected = new RoverDto(1);
+
+        // act
+        fakeInMemoryDatabase.insertIntoRoverTable();
+        RoverDto actual = fakeInMemoryDatabase.selectFromRoverTable(1);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.amaap.marsrover.service;
 
 import com.amaap.marsrover.domain.model.entity.RoverDto;
 import com.amaap.marsrover.repository.RoverRepository;
+import com.amaap.marsrover.service.exception.RoverNotFoundException;
 
 public class RoverService {
     private final RoverRepository roverRepository;
@@ -12,5 +13,11 @@ public class RoverService {
 
     public RoverDto create() {
         return roverRepository.add();
+    }
+
+    public RoverDto find(int id) throws RoverNotFoundException {
+        RoverDto rover = roverRepository.find(id);
+        if(rover == null) throw new RoverNotFoundException("Rover with id:"+ id + " not found");
+        return rover;
     }
 }

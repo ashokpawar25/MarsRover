@@ -4,4 +4,6 @@ import com.amaap.marsrover.domain.model.entity.RoverDto;
 
 public interface RoverRepository {
     RoverDto add();
+
+    RoverDto find(int id);
 }

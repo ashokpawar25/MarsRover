@@ -20,4 +20,18 @@ class InMemoryRoverRepositoryTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToGetRoverByIdFromRepository()
+    {
+        // arrange
+        RoverDto expected = new RoverDto(1);
+
+        // act
+        inMemoryRoverRepository.add();
+        RoverDto actual = inMemoryRoverRepository.find(1);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

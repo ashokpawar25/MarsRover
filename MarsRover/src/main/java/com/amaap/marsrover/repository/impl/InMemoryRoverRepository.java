@@ -15,4 +15,9 @@ public class InMemoryRoverRepository implements RoverRepository {
     public RoverDto add() {
         return inMemoryDatabase.insertIntoRoverTable();
     }
+
+    @Override
+    public RoverDto find(int id) {
+        return inMemoryDatabase.selectFromRoverTable(id);
+    }
 }

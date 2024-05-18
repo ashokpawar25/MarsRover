@@ -18,6 +18,10 @@ public class RoverDto {
         return isDeployed;
     }
 
+    public void setDeployed() {
+        isDeployed = true;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

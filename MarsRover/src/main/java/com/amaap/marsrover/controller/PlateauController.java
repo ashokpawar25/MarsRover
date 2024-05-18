@@ -5,6 +5,7 @@ import com.amaap.marsrover.controller.dto.Response;
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import com.amaap.marsrover.service.PlateauService;
+import com.amaap.marsrover.service.exception.PlateauNotFoundException;
 
 public class PlateauController {
     private final PlateauService plateauService;
@@ -22,7 +23,7 @@ public class PlateauController {
         }
     }
 
-    public PlateauDto find(int id) {
+    public PlateauDto find(int id) throws PlateauNotFoundException {
         return plateauService.find(id);
     }
 }

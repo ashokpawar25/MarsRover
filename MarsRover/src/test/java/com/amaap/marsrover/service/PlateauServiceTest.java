@@ -4,6 +4,7 @@ import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import com.amaap.marsrover.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.marsrover.repository.impl.InMemoryPlateauRepository;
+import com.amaap.marsrover.service.exception.PlateauNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,7 +35,7 @@ class PlateauServiceTest {
     }
 
     @Test
-    void shouldBeAbleToFindPlateauById() throws InvalidPlateauDimensionsException {
+    void shouldBeAbleToFindPlateauById() throws InvalidPlateauDimensionsException, PlateauNotFoundException {
         // arrange
         int id = 1;
         int length = 5;
@@ -47,5 +48,11 @@ class PlateauServiceTest {
 
         // assert
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenPlateauIsNotFound()
+    {
+        assertThrows(PlateauNotFoundException.class,()->plateauService.find(1));
     }
 }

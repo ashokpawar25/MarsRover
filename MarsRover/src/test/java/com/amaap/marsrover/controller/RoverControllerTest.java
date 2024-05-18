@@ -1,4 +1,4 @@
-package com.amaap.marsrover;
+package com.amaap.marsrover.controller;
 
 import com.amaap.marsrover.controller.RoverController;
 import com.amaap.marsrover.controller.dto.HttpStatus;

@@ -1,6 +1,8 @@
 package com.amaap.marsrover;
 
 import com.amaap.marsrover.controller.RoverController;
+import com.amaap.marsrover.controller.dto.HttpStatus;
+import com.amaap.marsrover.controller.dto.Response;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
 import com.amaap.marsrover.repository.RoverRepository;
 import com.amaap.marsrover.repository.db.InMemoryDatabase;
@@ -14,18 +16,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class RoverControllerTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    RoverRepository roverRepository = new InMemoryRoverRepository(inMemoryDatabase);
-    RoverService roverService = new RoverService(roverRepository);
-    RoverController roverController = new RoverController(roverService);
+    RoverController roverController = new RoverController(new RoverService
+            (new InMemoryRoverRepository(new FakeInMemoryDatabase())));
     @Test
     void shouldBeAbleToCreateRover()
     {
         // arrange
-        RoverDto expected = new RoverDto(1);
+        Response expected = new Response(HttpStatus.OK,"Rover Created Successfully");
 
         // act
-        RoverDto actual = roverController.create();
+        Response actual = roverController.create();
 
         // assert
         assertEquals(expected,actual);
@@ -42,5 +42,11 @@ public class RoverControllerTest {
 
         // assert
         assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenRoverWithGivenIdIsNotFound()
+    {
+        assertThrows(RoverNotFoundException.class,()->roverController.find(1));
     }
 }

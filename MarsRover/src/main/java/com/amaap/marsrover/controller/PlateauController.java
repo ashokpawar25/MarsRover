@@ -21,4 +21,8 @@ public class PlateauController {
             return new Response(HttpStatus.BADREQUEST,e.getMessage());
         }
     }
+
+    public PlateauDto find(int id) {
+        return plateauService.find(id);
+    }
 }

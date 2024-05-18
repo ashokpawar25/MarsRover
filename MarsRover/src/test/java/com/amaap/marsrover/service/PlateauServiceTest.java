@@ -32,4 +32,20 @@ class PlateauServiceTest {
         assertThrows(InvalidPlateauDimensionsException.class,()->plateauService.create(-4,-5));
         assertThrows(InvalidPlateauDimensionsException.class,()->plateauService.create(4,0));
     }
+
+    @Test
+    void shouldBeAbleToFindPlateauById() throws InvalidPlateauDimensionsException {
+        // arrange
+        int id = 1;
+        int length = 5;
+        int breadth = 5;
+        PlateauDto expected = new PlateauDto(id,length,breadth);
+
+        // act
+        plateauService.create(length,breadth);
+        PlateauDto actual = plateauService.find(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

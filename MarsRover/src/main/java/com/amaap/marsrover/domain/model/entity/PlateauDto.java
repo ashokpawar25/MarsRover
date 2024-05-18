@@ -23,6 +23,10 @@ public class PlateauDto {
         return new PlateauDto(id,length,breadth);
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

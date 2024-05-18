@@ -31,4 +31,20 @@ class InMemoryPlateauRepositoryTest {
         assertThrows(InvalidPlateauDimensionsException.class,()->inMemoryPlateauRepository.add(-4,-5));
         assertThrows(InvalidPlateauDimensionsException.class,()->inMemoryPlateauRepository.add(4,0));
     }
+
+    @Test
+    void shouldBeAbleToGetPlateauByIdFromRepository() throws InvalidPlateauDimensionsException {
+        // arrange
+        int id = 1;
+        int length = 5;
+        int breadth = 5;
+        PlateauDto expected = new PlateauDto(id,length,breadth);
+
+        // act
+        inMemoryPlateauRepository.add(length,breadth);
+        PlateauDto actual = inMemoryPlateauRepository.find(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
 }

@@ -31,4 +31,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         plateauDtos.add(plateau);
         return plateau;
     }
+
+    @Override
+    public PlateauDto selectFromPlateauTable(int id) {
+        return plateauDtos.stream().filter(plateau -> plateau.getId() == id).findFirst().orElse(null);
+    }
 }

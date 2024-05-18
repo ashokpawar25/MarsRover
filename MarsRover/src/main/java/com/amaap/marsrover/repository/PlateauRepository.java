@@ -5,4 +5,6 @@ import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimension
 
 public interface PlateauRepository {
     PlateauDto add(int length, int breadth) throws InvalidPlateauDimensionsException;
+
+    PlateauDto find(int id);
 }

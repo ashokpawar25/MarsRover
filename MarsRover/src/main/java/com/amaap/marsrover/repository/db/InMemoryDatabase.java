@@ -10,4 +10,6 @@ public interface InMemoryDatabase {
     RoverDto selectFromRoverTable(int id);
 
     PlateauDto insertIntoPlateauTable(int length, int breadth) throws InvalidPlateauDimensionsException;
+
+    PlateauDto selectFromPlateauTable(int id);
 }

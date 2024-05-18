@@ -15,4 +15,9 @@ public class InMemoryPlateauRepository implements PlateauRepository {
     public PlateauDto add(int length, int breadth) throws InvalidPlateauDimensionsException {
         return inMemoryDatabase.insertIntoPlateauTable(length,breadth);
     }
+
+    @Override
+    public PlateauDto find(int id) {
+        return inMemoryDatabase.selectFromPlateauTable(id);
+    }
 }

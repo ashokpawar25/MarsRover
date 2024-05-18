@@ -60,4 +60,20 @@ class FakeInMemoryDatabaseTest {
         assertThrows(InvalidPlateauDimensionsException.class,()->fakeInMemoryDatabase.insertIntoPlateauTable(4,0));
     }
 
+    @Test
+    void shouldBeAbleToGetPlateauByIdFromDatabase() throws InvalidPlateauDimensionsException {
+        // arrange
+        int id = 1;
+        int length = 5;
+        int breadth = 5;
+        PlateauDto expected = new PlateauDto(id,length,breadth);
+
+        // act
+        fakeInMemoryDatabase.insertIntoPlateauTable(length,breadth);
+        PlateauDto actual = fakeInMemoryDatabase.selectFromPlateauTable(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
 }

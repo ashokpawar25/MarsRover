@@ -13,4 +13,8 @@ public class PlateauService {
     public PlateauDto create(int length, int breadth) throws InvalidPlateauDimensionsException {
         return plateauRepository.add(length,breadth);
     }
+
+    public PlateauDto find(int id) {
+        return plateauRepository.find(id);
+    }
 }

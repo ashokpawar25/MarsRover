@@ -13,16 +13,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PlateauControllerTest {
     PlateauController plateauController = new PlateauController(new PlateauService(new InMemoryPlateauRepository(new FakeInMemoryDatabase())));
     @Test
-    void shouldBeAbleToGetOkResponseWhenPlateauCreated() throws InvalidPlateauDimensionsException {
+    void shouldBeAbleToGetOkResponseWhenPlateauCreated(){
         // arrange
         int length = 5;
         int breadth = 5;
-        Response plateauDto = new Response(HttpStatus.OK,"Plateau created successfully");
+        Response expected = new Response(HttpStatus.OK,"Plateau created successfully");
 
         // act
         Response actual = plateauController.create(length,breadth);
 
         // assert
-        assertEquals(plateauDto,actual);
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetBadRequestAsResponseWhenPlateauDimensionsAreInvalid(){
+        // arrange
+        int length = -5;
+        int breadth = 5;
+        Response expected = new Response(HttpStatus.BADREQUEST,"Invalid Plateau dimensions :("+length+","+breadth+")");
+
+        // act
+        Response actual = plateauController.create(length,breadth);
+
+        // assert
+        assertEquals(expected,actual);
     }
 }

@@ -12,8 +12,13 @@ public class PlateauController {
         this.plateauService = plateauService;
     }
 
-    public Response create(int length, int breadth) throws InvalidPlateauDimensionsException {
-        plateauService.create(length,breadth);
-        return new Response(HttpStatus.OK,"Plateau created successfully");
+    public Response create(int length, int breadth){
+        try {
+            plateauService.create(length,breadth);
+            return new Response(HttpStatus.OK,"Plateau created successfully");
+
+        } catch (InvalidPlateauDimensionsException e) {
+            return new Response(HttpStatus.BADREQUEST,e.getMessage());
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.amaap.marsrover.repository.db.impl;
 
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
+import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,8 +39,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToAddPlateauInDatabase()
-    {
+    void shouldBeAbleToAddPlateauInDatabase() throws InvalidPlateauDimensionsException {
         // arrange
         int length = 5;
         int breadth = 5;

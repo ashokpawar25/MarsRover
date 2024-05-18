@@ -1,6 +1,7 @@
 package com.amaap.marsrover.repository.impl;
 
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
+import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import com.amaap.marsrover.repository.PlateauRepository;
 import com.amaap.marsrover.repository.db.InMemoryDatabase;
 
@@ -11,7 +12,7 @@ public class InMemoryPlateauRepository implements PlateauRepository {
     }
 
     @Override
-    public PlateauDto add(int length, int breadth) {
+    public PlateauDto add(int length, int breadth) throws InvalidPlateauDimensionsException {
         return inMemoryDatabase.insertIntoPlateauTable(length,breadth);
     }
 }

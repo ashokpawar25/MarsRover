@@ -2,6 +2,7 @@ package com.amaap.marsrover.repository.db.impl;
 
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
+import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import com.amaap.marsrover.repository.db.InMemoryDatabase;
 
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     }
 
     @Override
-    public PlateauDto insertIntoPlateauTable(int length, int breadth) {
-        PlateauDto plateau = new PlateauDto(++plateauIdCounter,length,breadth);
+    public PlateauDto insertIntoPlateauTable(int length, int breadth) throws InvalidPlateauDimensionsException {
+        PlateauDto plateau = PlateauDto.create(++plateauIdCounter,length,breadth);
         plateauDtos.add(plateau);
         return plateau;
     }

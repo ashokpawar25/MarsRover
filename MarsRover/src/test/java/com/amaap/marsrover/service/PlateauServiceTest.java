@@ -1,6 +1,7 @@
 package com.amaap.marsrover.service;
 
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
+import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
 import com.amaap.marsrover.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.marsrover.repository.impl.InMemoryPlateauRepository;
 import org.junit.jupiter.api.Test;
@@ -11,8 +12,7 @@ class PlateauServiceTest {
     PlateauService plateauService = new PlateauService(new InMemoryPlateauRepository(new FakeInMemoryDatabase()));
 
     @Test
-    void shouldBeAbleToCreatePlateau()
-    {
+    void shouldBeAbleToCreatePlateau() throws InvalidPlateauDimensionsException {
         // arrange
         int length = 5;
         int breadth = 5;

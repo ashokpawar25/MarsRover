@@ -1,5 +1,7 @@
 package com.amaap.marsrover.domain.model.entity;
 
+import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimensionsException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,11 @@ public class PlateauDto {
         this.length = length;
         this.breadth = breadth;
         this.deployedRovers = new ArrayList();
+    }
+
+    public static PlateauDto create(int id, int length, int breadth) throws InvalidPlateauDimensionsException {
+        if(length <= 0 || breadth <= 0) throw new InvalidPlateauDimensionsException("Invalid Plateau dimensions :("+length+","+breadth+")");
+        return new PlateauDto(id,length,breadth);
     }
 
     @Override

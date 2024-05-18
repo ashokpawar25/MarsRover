@@ -40,4 +40,10 @@ class RoverServiceTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenRoverWithGivenIdIsNotFound()
+    {
+        assertThrows(RoverNotFoundException.class,()->roverService.find(1));
+    }
 }

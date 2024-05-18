@@ -52,4 +52,12 @@ class FakeInMemoryDatabaseTest {
         assertEquals(expected,actual);
     }
 
+    @Test
+    void shouldBeAbleToThrowExceptionWhenInvalidPlateauDimensionsArePassed()
+    {
+        assertThrows(InvalidPlateauDimensionsException.class,()->fakeInMemoryDatabase.insertIntoPlateauTable(-4,5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->fakeInMemoryDatabase.insertIntoPlateauTable(-4,-5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->fakeInMemoryDatabase.insertIntoPlateauTable(4,0));
+    }
+
 }

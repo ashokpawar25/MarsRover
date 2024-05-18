@@ -24,4 +24,12 @@ class PlateauServiceTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenInvalidPlateauDimensionsArePassed()
+    {
+        assertThrows(InvalidPlateauDimensionsException.class,()->plateauService.create(-4,5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->plateauService.create(-4,-5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->plateauService.create(4,0));
+    }
 }

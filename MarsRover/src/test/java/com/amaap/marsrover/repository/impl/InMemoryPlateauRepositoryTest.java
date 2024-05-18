@@ -23,4 +23,12 @@ class InMemoryPlateauRepositoryTest {
         // assert
         assertEquals(expected,actual);
     }
+
+    @Test
+    void shouldBeAbleToThrowExceptionWhenInvalidPlateauDimensionsArePassed()
+    {
+        assertThrows(InvalidPlateauDimensionsException.class,()->inMemoryPlateauRepository.add(-4,5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->inMemoryPlateauRepository.add(-4,-5));
+        assertThrows(InvalidPlateauDimensionsException.class,()->inMemoryPlateauRepository.add(4,0));
+    }
 }

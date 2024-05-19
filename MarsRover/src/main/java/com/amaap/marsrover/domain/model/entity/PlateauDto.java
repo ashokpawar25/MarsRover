@@ -34,15 +34,15 @@ public class PlateauDto {
     }
 
 
+    public Optional<DeployedRoverDto> getDeployedRover(int roverId) {
+        return deployedRovers.stream().filter(rover -> rover.getId() == roverId).findFirst();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlateauDto plateauDto = (PlateauDto) o;
         return id == plateauDto.id && length == plateauDto.length && breadth == plateauDto.breadth && Objects.equals(deployedRovers, plateauDto.deployedRovers);
-    }
-
-    public Optional<DeployedRoverDto> getDeployedRover(int roverId) {
-        return deployedRovers.stream().filter(rover -> rover.getId() == roverId).findFirst();
     }
 }

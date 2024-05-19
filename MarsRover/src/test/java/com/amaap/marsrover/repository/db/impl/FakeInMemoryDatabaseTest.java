@@ -39,6 +39,20 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
+    void shouldBeAbleToGetNullWhenRoverNotFoundInDatabase()
+    {
+        // arrange
+        RoverDto expected = null;
+
+        // act
+        fakeInMemoryDatabase.insertIntoRoverTable();
+        RoverDto actual = fakeInMemoryDatabase.selectFromRoverTable(2);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
     void shouldBeAbleToAddPlateauInDatabase() throws InvalidPlateauDimensionsException {
         // arrange
         int length = 5;
@@ -67,6 +81,22 @@ class FakeInMemoryDatabaseTest {
         int length = 5;
         int breadth = 5;
         PlateauDto expected = new PlateauDto(id,length,breadth);
+
+        // act
+        fakeInMemoryDatabase.insertIntoPlateauTable(length,breadth);
+        PlateauDto actual = fakeInMemoryDatabase.selectFromPlateauTable(id);
+
+        // assert
+        assertEquals(expected,actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetNullWhenPlateauNotFoundInDatabase() throws InvalidPlateauDimensionsException {
+        // arrange
+        int id = 2;
+        int length = 5;
+        int breadth = 5;
+        PlateauDto expected = null;
 
         // act
         fakeInMemoryDatabase.insertIntoPlateauTable(length,breadth);

@@ -5,6 +5,7 @@ import com.amaap.marsrover.domain.model.entity.exception.InvalidPlateauDimension
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class PlateauDto {
     private final int id;
@@ -39,5 +40,9 @@ public class PlateauDto {
         if (o == null || getClass() != o.getClass()) return false;
         PlateauDto plateauDto = (PlateauDto) o;
         return id == plateauDto.id && length == plateauDto.length && breadth == plateauDto.breadth && Objects.equals(deployedRovers, plateauDto.deployedRovers);
+    }
+
+    public Optional<DeployedRoverDto> getDeployedRover(int roverId) {
+        return deployedRovers.stream().filter(rover -> rover.getId() == roverId).findFirst();
     }
 }

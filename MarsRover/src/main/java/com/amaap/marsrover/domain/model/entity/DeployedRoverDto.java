@@ -16,6 +16,26 @@ public class DeployedRoverDto {
         this.direction = direction;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public Coordinate getCoordinate() {
+        return coordinate;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setCoordinate(Coordinate coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -28,6 +28,16 @@ public class DeployedRoverDto {
         return direction;
     }
 
+    public Coordinate moveInYDirection(int value) {
+        this.coordinate.setY(this.coordinate.getY()+value);
+        return this.coordinate;
+    }
+
+    public Coordinate moveInXDirection(int value) {
+        this.coordinate.setX(this.coordinate.getX()+value);
+        return this.coordinate;
+    }
+
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
     }

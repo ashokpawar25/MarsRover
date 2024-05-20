@@ -1,16 +1,25 @@
 package com.amaap.marsrover.repository.impl;
 
+import com.amaap.marsrover.AppModule;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
-import com.amaap.marsrover.repository.db.impl.FakeInMemoryDatabase;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InMemoryRoverRepositoryTest {
-    InMemoryRoverRepository inMemoryRoverRepository = new InMemoryRoverRepository(new FakeInMemoryDatabase());
+    InMemoryRoverRepository inMemoryRoverRepository;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        inMemoryRoverRepository = injector.getInstance(InMemoryRoverRepository.class);
+    }
+
     @Test
-    void shouldBeAbleToAddRoverIntoRepository()
-    {
+    void shouldBeAbleToAddRoverIntoRepository() {
         // arrange
         RoverDto expected = new RoverDto(1);
 
@@ -18,12 +27,11 @@ class InMemoryRoverRepositoryTest {
         RoverDto actual = inMemoryRoverRepository.add();
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void shouldBeAbleToGetRoverByIdFromRepository()
-    {
+    void shouldBeAbleToGetRoverByIdFromRepository() {
         // arrange
         RoverDto expected = new RoverDto(1);
 
@@ -32,6 +40,6 @@ class InMemoryRoverRepositoryTest {
         RoverDto actual = inMemoryRoverRepository.find(1);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

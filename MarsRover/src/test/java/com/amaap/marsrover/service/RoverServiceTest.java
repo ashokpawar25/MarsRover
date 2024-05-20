@@ -1,23 +1,26 @@
 package com.amaap.marsrover.service;
 
-import com.amaap.marsrover.controller.RoverController;
+import com.amaap.marsrover.AppModule;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
-import com.amaap.marsrover.repository.RoverRepository;
-import com.amaap.marsrover.repository.db.InMemoryDatabase;
-import com.amaap.marsrover.repository.db.impl.FakeInMemoryDatabase;
-import com.amaap.marsrover.repository.impl.InMemoryRoverRepository;
 import com.amaap.marsrover.service.exception.RoverNotFoundException;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RoverServiceTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    RoverRepository roverRepository = new InMemoryRoverRepository(inMemoryDatabase);
-    RoverService roverService = new RoverService(roverRepository);
+    RoverService roverService;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        roverService = injector.getInstance(RoverService.class);
+    }
+
     @Test
-    void shouldBeAbleToCreateRover()
-    {
+    void shouldBeAbleToCreateRover() {
         // arrange
         RoverDto expected = new RoverDto(1);
 
@@ -25,7 +28,7 @@ class RoverServiceTest {
         RoverDto actual = roverService.create();
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -38,12 +41,11 @@ class RoverServiceTest {
         RoverDto actual = roverService.find(1);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    void shouldBeAbleToThrowExceptionWhenRoverWithGivenIdIsNotFound()
-    {
-        assertThrows(RoverNotFoundException.class,()->roverService.find(1));
+    void shouldBeAbleToThrowExceptionWhenRoverWithGivenIdIsNotFound() {
+        assertThrows(RoverNotFoundException.class, () -> roverService.find(1));
     }
 }

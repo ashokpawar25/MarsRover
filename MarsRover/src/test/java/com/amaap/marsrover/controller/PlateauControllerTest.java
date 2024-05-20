@@ -1,26 +1,30 @@
 package com.amaap.marsrover.controller;
 
+import com.amaap.marsrover.AppModule;
 import com.amaap.marsrover.controller.dto.HttpStatus;
 import com.amaap.marsrover.controller.dto.Response;
 import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.model.valueobject.Coordinate;
 import com.amaap.marsrover.domain.model.valueobject.Direction;
-import com.amaap.marsrover.repository.db.InMemoryDatabase;
-import com.amaap.marsrover.repository.db.impl.FakeInMemoryDatabase;
-import com.amaap.marsrover.repository.impl.InMemoryPlateauRepository;
-import com.amaap.marsrover.repository.impl.InMemoryRoverRepository;
-import com.amaap.marsrover.service.PlateauService;
 import com.amaap.marsrover.service.RoverService;
 import com.amaap.marsrover.service.exception.PlateauNotFoundException;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PlateauControllerTest {
-    InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-    RoverService roverService = new RoverService(new InMemoryRoverRepository(inMemoryDatabase));
-    PlateauController plateauController = new PlateauController(new PlateauService(new InMemoryPlateauRepository(inMemoryDatabase), roverService));
+    RoverService roverService;
+    PlateauController plateauController;
+
+    @BeforeEach
+    void setUp() {
+        Injector injector = Guice.createInjector(new AppModule());
+        roverService = injector.getInstance(RoverService.class);
+        plateauController = injector.getInstance(PlateauController.class);
+    }
 
     @Test
     void shouldBeAbleToGetOkResponseWhenPlateauCreated() {

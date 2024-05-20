@@ -15,13 +15,15 @@ import com.amaap.marsrover.service.RoverService;
 import com.amaap.marsrover.service.exception.PlateauNotFoundException;
 import com.amaap.marsrover.service.exception.RoverAlreadyDeployedException;
 import com.amaap.marsrover.service.exception.RoverNotFoundException;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 
 public class Main {
     public static void main(String[] args) throws InvalidPlateauDimensionsException, RoverNotFoundException, PlateauNotFoundException, RoverAlreadyDeployedException, InvalidInstructionException {
-        InMemoryDatabase inMemoryDatabase = new FakeInMemoryDatabase();
-        RoverService roverService = new RoverService(new InMemoryRoverRepository(inMemoryDatabase));
-        PlateauService plateauService = new PlateauService(new InMemoryPlateauRepository(inMemoryDatabase),roverService);
-        InstructionService instructionService = new InstructionService(plateauService);
+        Injector injector = Guice.createInjector(new AppModule());
+        RoverService roverService = injector.getInstance(RoverService.class);
+        PlateauService plateauService = injector.getInstance(PlateauService.class);
+        InstructionService instructionService = injector.getInstance(InstructionService.class);
         Coordinate coordinate = new Coordinate(1,2);
         roverService.create();
         plateauService.create(5,5);
@@ -29,6 +31,6 @@ public class Main {
         DeployedRoverDto rover = instructionService.processInstructions(1, 1, "LMLMLMLMM");
         Coordinate coordinates = rover.getCoordinate();
         Direction direction = rover.getDirection();
-        System.out.println("Position of rover is "+coordinates.getX()+" "+coordinates.getY()+" , and direction is "+direction);
+        System.out.println("Position of rover is "+coordinates.getX()+","+coordinates.getY()+" and direction is "+direction);
     }
 }

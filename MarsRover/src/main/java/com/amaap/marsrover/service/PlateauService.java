@@ -10,10 +10,12 @@ import com.amaap.marsrover.repository.PlateauRepository;
 import com.amaap.marsrover.service.exception.PlateauNotFoundException;
 import com.amaap.marsrover.service.exception.RoverAlreadyDeployedException;
 import com.amaap.marsrover.service.exception.RoverNotFoundException;
+import jakarta.inject.Inject;
 
 public class PlateauService {
     private final PlateauRepository plateauRepository;
     private final RoverService roverService;
+    @Inject
     public PlateauService(PlateauRepository plateauRepository,RoverService roverService) {
         this.plateauRepository = plateauRepository;
         this.roverService = roverService;

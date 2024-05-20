@@ -5,10 +5,11 @@ import com.amaap.marsrover.controller.dto.Response;
 import com.amaap.marsrover.domain.model.entity.RoverDto;
 import com.amaap.marsrover.service.RoverService;
 import com.amaap.marsrover.service.exception.RoverNotFoundException;
+import jakarta.inject.Inject;
 
 public class RoverController {
     private final RoverService roverService;
-
+    @Inject
     public RoverController(RoverService roverService) {
         this.roverService = roverService;
     }

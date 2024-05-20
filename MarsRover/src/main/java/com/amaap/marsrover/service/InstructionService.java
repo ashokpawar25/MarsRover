@@ -5,12 +5,13 @@ import com.amaap.marsrover.domain.model.entity.PlateauDto;
 import com.amaap.marsrover.domain.service.exception.InvalidInstructionException;
 import com.amaap.marsrover.service.exception.PlateauNotFoundException;
 import com.amaap.marsrover.service.exception.RoverNotFoundException;
+import jakarta.inject.Inject;
 
 import static com.amaap.marsrover.domain.service.InstructionProcessor.process;
 
 public class InstructionService {
     private final PlateauService plateauService;
-
+    @Inject
     public InstructionService(PlateauService plateauService) {
         this.plateauService = plateauService;
     }

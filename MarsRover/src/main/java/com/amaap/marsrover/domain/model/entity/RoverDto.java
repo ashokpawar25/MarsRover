@@ -3,7 +3,7 @@ package com.amaap.marsrover.domain.model.entity;
 import java.util.Objects;
 
 public class RoverDto {
-    private int id;
+    private final int id;
     private boolean isDeployed;
     public RoverDto(int id) {
         this.id = id;
